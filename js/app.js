@@ -46,13 +46,11 @@ function toggleSidebar() {
 
 // ── SETTINGS ──────────────────────────────────────────────
 function loadSettings() {
-  AppState.apiKey = localStorage.getItem('groq_api_key') || '';
   AppState.model = localStorage.getItem('groq_model') || 'llama-3.3-70b-versatile';
   updateApiStatus();
 }
 
 function openSettings() {
-  document.getElementById('apiKeyInput').value = AppState.apiKey;
   document.getElementById('modelSelect').value = AppState.model;
   document.getElementById('settingsModal').style.display = 'flex';
 }
@@ -62,26 +60,17 @@ function closeSettings() {
 }
 
 function saveSettings() {
-  const key = document.getElementById('apiKeyInput').value.trim();
   const model = document.getElementById('modelSelect').value;
-  AppState.apiKey = key;
   AppState.model = model;
-  localStorage.setItem('groq_api_key', key);
   localStorage.setItem('groq_model', model);
-  updateApiStatus();
   closeSettings();
 }
 
 function updateApiStatus() {
   const dot = document.getElementById('statusDot');
   const txt = document.getElementById('statusText');
-  if (AppState.apiKey) {
-    dot.classList.add('active');
-    txt.textContent = 'Groq Ready';
-  } else {
-    dot.classList.remove('active');
-    txt.textContent = 'API not set';
-  }
+  dot.classList.add('active');
+  txt.textContent = 'AI Ready';
 }
 
 // ── DATA STATUS BADGE ──────────────────────────────────────
@@ -97,18 +86,12 @@ function updateDataBadge() {
   }
 }
 
-// ── GROQ API CALL ──────────────────────────────────────────
+// ── GROQ API CALL (via Vercel backend — key hidden) ────────
 async function callGroq(systemPrompt, userPrompt) {
-  if (!AppState.apiKey) {
-    return '⚠ No API key set. Please open Settings and enter your Groq API key (free at console.groq.com).';
-  }
   try {
-    const res = await fetch('https://api.groq.com/openai/v1/chat/completions', {
+    const res = await fetch('/api/groq', {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${AppState.apiKey}`,
-      },
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         model: AppState.model,
         messages: [

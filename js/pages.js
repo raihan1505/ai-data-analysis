@@ -483,15 +483,7 @@ function pageAnalysis() {
   <h1 class="page-title">AI Analysis</h1>
   <p class="page-sub">Powered by <strong style="color:var(--accent)">Groq API</strong> (free) — ask anything about your data using Llama 3.3 / Mixtral.</p>
 
-  ${!AppState.apiKey ? `
-  <div class="alert-card">
-    <span style="font-size:22px">🔑</span>
-    <div style="flex:1">
-      <div style="font-weight:600;margin-bottom:3px">Groq API key required</div>
-      <div style="font-size:12px;color:var(--text2)">Free at <a href="https://console.groq.com" target="_blank" style="color:var(--accent)">console.groq.com</a> — no credit card needed. Then click Settings.</div>
-    </div>
-    <button class="btn-ghost" onclick="openSettings()">⚙ Settings</button>
-  </div>` : ''}
+
 
   <div class="card">
     <div class="card-title">Quick Analysis</div>

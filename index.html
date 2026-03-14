@@ -68,10 +68,11 @@
         <button onclick="closeSettings()" class="modal-close">✕</button>
       </div>
       <div class="modal-body">
-        <label class="field-label">Groq API Key <span style="color:var(--success)">(Free!)</span></label>
-        <input type="password" id="apiKeyInput" class="field-input" placeholder="gsk_..."/>
-        <p class="field-hint">Get your free key at <a href="https://console.groq.com" target="_blank" style="color:var(--accent)">console.groq.com</a> — stored only in your browser.</p>
-        <label class="field-label" style="margin-top:1.25rem">AI Model</label>
+        <div style="display:flex;align-items:center;gap:10px;padding:0.75rem;background:rgba(52,211,153,0.07);border:1px solid rgba(52,211,153,0.2);border-radius:8px;margin-bottom:1.25rem">
+          <span style="font-size:18px">✅</span>
+          <div style="font-size:13px;color:var(--text2)">AI sudah aktif — tidak perlu API key. Dikelola oleh server.</div>
+        </div>
+        <label class="field-label">AI Model</label>
         <select id="modelSelect" class="field-input">
           <option value="llama-3.3-70b-versatile">Llama 3.3 70B (Best quality)</option>
           <option value="llama3-8b-8192">Llama 3 8B (Fastest)</option>
